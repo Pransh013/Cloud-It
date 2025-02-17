@@ -24,13 +24,14 @@ export default async function HomeLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
+
   if (!currentUser) redirect("/sign-in");
   return (
     <SidebarProvider>
-      <AppSidebar user={currentUser} />
+      <AppSidebar {...currentUser} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex w-full items-center gap-2 px-4">
+        <header className="flex h-16 shrink-0 justify-between items-center px-6">
+          <div className="flex justify-between items-center gap-2 ">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
@@ -47,7 +48,7 @@ export default async function HomeLayout({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div className="flex items-center flex-shrink-0 gap-4">
+          <div className="flex items-center gap-4">
             <ToggleTheme />
             <SearchForm className="w-full sm:ml-auto sm:w-auto" />
           </div>

@@ -39,12 +39,12 @@ export const data = {
   navSecondary: [
     {
       title: "Support",
-      url: "#",
+      url: "/",
       icon: LifeBuoy,
     },
     {
       title: "Feedback",
-      url: "#",
+      url: "/",
       icon: Send,
     },
   ],

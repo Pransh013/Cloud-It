@@ -13,10 +13,15 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { data } from "@/config";
-import { UserSignupType } from "@/lib/actions/user.actions";
 import Image from "next/image";
 
-export function AppSidebar({ user }: { user: UserSignupType }) {
+export function AppSidebar({
+  fullName,
+  email,
+}: {
+  fullName: string;
+  email: string;
+}) {
   return (
     <Sidebar variant="inset" className="bg-sidebar">
       <SidebarHeader>
@@ -45,7 +50,7 @@ export function AppSidebar({ user }: { user: UserSignupType }) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser fullName={fullName} email={email} />
       </SidebarFooter>
     </Sidebar>
   );
