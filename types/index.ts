@@ -9,3 +9,12 @@ export type UploadFileType = {
   accountId: string;
   path: string;
 };
+
+export type SearchParamProps = {
+  params?: Promise<SegmentParams>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+type SegmentParams = {
+  type?: string;
+};
