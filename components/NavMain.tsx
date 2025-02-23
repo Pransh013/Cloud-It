@@ -36,11 +36,12 @@ export function NavMain({
                 tooltip={item.title}
                 className={cn(
                   "h-12 pl-4 gap-4",
-                  item.url === pathname && "bg-black hover:bg-black"
+                  item.url === pathname &&
+                    "bg-primary text-secondary hover:text-secondary hover:bg-primary"
                 )}
               >
-                <Link href={item.url}>
-                  <item.icon/>
+                <Link href={item.url} className="">
+                  <item.icon />
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>

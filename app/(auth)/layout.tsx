@@ -10,7 +10,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
             alt="logo"
             height={82}
             width={224}
-            className="h-auto w-auto"
           />
           <div className="space-y-5 text-white">
             <h1 className="h1">Manage your files the best way</h1>

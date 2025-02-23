@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/AppSidebar";
+import FileUploader from "@/components/FileUploader";
 import { SearchForm } from "@/components/SearchBox";
 import { ToggleTheme } from "@/components/ToggleTheme";
 import {
@@ -24,11 +25,11 @@ export default async function HomeLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-
-  if (!currentUser) redirect("/sign-in");
+  if (!currentUser) return redirect("/sign-in");
+  
   return (
     <SidebarProvider>
-      <AppSidebar {...currentUser} />
+      <AppSidebar fullName={currentUser.fullName} email={currentUser.email} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 justify-between items-center px-6">
           <div className="flex justify-between items-center gap-2 ">
@@ -37,25 +38,22 @@ export default async function HomeLayout({
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <BreadcrumbPage>Dashboard</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
           <div className="flex items-center gap-4">
+            <FileUploader ownerId={currentUser.$id} accountId={ currentUser.accountId} />
             <ToggleTheme />
             <SearchForm className="w-full sm:ml-auto sm:w-auto" />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0 border-2 border-black">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
