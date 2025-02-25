@@ -18,7 +18,7 @@ const Thumbnail = ({
     
   const isImage = type === "image" && extension !== "svg";
   return (
-    <figure className={cn("thumbnail border-2 border-muted-foreground", className)}>
+    <figure className={cn("thumbnail border border-muted-foreground", className)}>
       <Image
         src={isImage ? url : getFileIcon(type, extension)}
         height={80}

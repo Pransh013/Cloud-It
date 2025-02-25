@@ -11,7 +11,7 @@ const FileType = async ({ params }: SearchParamProps) => {
     <div className="border rounded-lg px-8 py-4">
       <section>
         <h1 className="capitalize text-3xl font-bold">{type}</h1>
-        <div className="flex border-4 justify-between">
+        <div className="flex justify-between py-1">
           <p>
             Total: <span>0MB</span>
           </p>
@@ -23,7 +23,7 @@ const FileType = async ({ params }: SearchParamProps) => {
       </section>
 
       {files!.total > 0 ? (
-        <section>
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
           {files?.documents.map((file: Models.Document) => (
             <FileCard key={file.$id} file={file} />
           ))}
