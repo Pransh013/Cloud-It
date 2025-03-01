@@ -1,5 +1,4 @@
 import { cn, formatDateTime } from "@/lib/utils";
-import React from "react";
 
 const FormattedDateTime = ({
   date,
@@ -9,7 +8,7 @@ const FormattedDateTime = ({
   className?: string;
 }) => {
   return (
-    <p className={cn("body-1 text-light-200", className)}>
+    <p className={cn("text-gray-600 dark:text-gray-300", className)}>
       {formatDateTime(date)}
     </p>
   );

@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Models } from "node-appwrite";
 import { renameFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
+import FileDetails from "./FileDetails";
 
 const ActionModal = ({
   action,
@@ -46,13 +47,13 @@ const ActionModal = ({
       delete: () => {},
     };
 
-    const success = await actions[action.value as keyof typeof actions]()
+    const success = await actions[action.value as keyof typeof actions]();
   };
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
-      <AlertDialogContent className="flex flex-col gap-4">
-        <AlertDialogHeader className="">
+      <AlertDialogContent className="flex flex-col gap-4 w-96">
+        <AlertDialogHeader>
           <AlertDialogTitle className="text-center">
             {action.label}
           </AlertDialogTitle>
@@ -67,6 +68,7 @@ const ActionModal = ({
               className="!mt-6"
             />
           )}
+          {action.value === "details" && <FileDetails file={file} onClose={onClose}/>}
         </AlertDialogHeader>
         {["rename", "delete", "share"].includes(action.value) && (
           <AlertDialogFooter>
