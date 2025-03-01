@@ -90,3 +90,40 @@ export const videoExtensions = ["mp4", "avi", "mov", "mkv", "webm"];
 export const audioExtensions = ["mp3", "wav", "ogg", "flac"];
 
 export const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+export const actionsDropdownItems = [
+  {
+    label: "Rename",
+    icon: "/assets/icons/edit.svg",
+    value: "rename",
+  },
+  {
+    label: "Details",
+    icon: "/assets/icons/info.svg",
+    value: "details",
+  },
+  {
+    label: "Share",
+    icon: "/assets/icons/share.svg",
+    value: "share",
+  },
+  {
+    label: "Download",
+    icon: "/assets/icons/download.svg",
+    value: "download",
+  },
+  {
+    label: "Delete",
+    icon: "/assets/icons/delete.svg",
+    value: "delete",
+  },
+];
+
+export const actionDescriptions: Record<string, string> = {
+  rename:
+    "Changing the file name will update how it appears in your records. This action will not affect the file’s content.",
+  share:
+    "Sharing this file will grant others access based on the selected permissions. You can modify or revoke access at any time.",
+  delete:
+    "This action cannot be undone. This will permanently delete the file and remove it from our servers.",
+};

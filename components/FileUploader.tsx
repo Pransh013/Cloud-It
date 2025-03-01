@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button } from "./ui/button";
-import { cn, convertFileToUrl, getFileTypeAndExtension } from "@/lib/utils";
+import { convertFileToUrl, getFileTypeAndExtension } from "@/lib/utils";
 import { Upload, X } from "lucide-react";
 import Thumbnail from "./Thumbnail";
 import ProgressBar from "./ProgressBar";
@@ -15,11 +15,9 @@ import { usePathname } from "next/navigation";
 const FileUploader = ({
   ownerId,
   accountId,
-  className,
 }: {
   ownerId: string;
   accountId: string;
-  className?: string;
 }) => {
   const [files, setFiles] = useState<File[]>([]);
   const path = usePathname();

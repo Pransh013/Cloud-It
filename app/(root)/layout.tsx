@@ -31,7 +31,7 @@ export default async function HomeLayout({
     <SidebarProvider>
       <AppSidebar fullName={currentUser.fullName} email={currentUser.email} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 justify-between items-center px-6">
+        <header className="flex h-16 shrink-0 justify-between items-center px-6 border-b">
           <div className="flex justify-between items-center gap-2 ">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -48,12 +48,15 @@ export default async function HomeLayout({
             </Breadcrumb>
           </div>
           <div className="flex items-center gap-4">
-            <FileUploader ownerId={currentUser.$id} accountId={ currentUser.accountId} />
+            <FileUploader
+              ownerId={currentUser.$id}
+              accountId={currentUser.accountId}
+            />
             <ToggleTheme />
             <SearchForm className="w-full sm:ml-auto sm:w-auto" />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        <div className="flex flex-1">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

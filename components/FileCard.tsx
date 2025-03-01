@@ -3,13 +3,14 @@ import { Models } from "node-appwrite";
 import Thumbnail from "./Thumbnail";
 import { convertFileSize } from "@/lib/utils";
 import FormattedDateTime from "./FormattedDateTime";
+import ActionsDropdown from "./ActionsDropdown";
 
 const FileCard = ({ file }: { file: Models.Document }) => {
   return (
     <Link
       href={file.url}
       target="_blank"
-      className="flex cursor-pointer flex-col gap-6 p-5 shadow-[0_4px_30px] shadow-muted-foreground/35 dark:shadow-muted-foreground/15 border-2 rounded-2xl hover:shadow-drop-1 transition-all"
+      className="flex cursor-pointer flex-col gap-6 p-5 shadow-[0_4px_30px] shadow-muted-foreground/35 dark:shadow-muted-foreground/10 border-2 rounded-2xl hover:shadow-none transition-all"
     >
       <div className="flex justify-between">
         <Thumbnail
@@ -21,7 +22,7 @@ const FileCard = ({ file }: { file: Models.Document }) => {
         />
 
         <div className="flex flex-col justify-between items-end">
-          Actions Dropdown
+          <ActionsDropdown file={file} />
           <p className="">{convertFileSize(file.size)}</p>
         </div>
       </div>
@@ -31,7 +32,9 @@ const FileCard = ({ file }: { file: Models.Document }) => {
           date={file.$createdAt}
           className="body-2 text-light-100"
         />
-        <p className="caption line-clamp-1 text-light-200">By: { file.owner.fullName}</p>
+        <p className="caption line-clamp-1 text-light-200">
+          By: {file.owner.fullName}
+        </p>
       </div>
     </Link>
   );

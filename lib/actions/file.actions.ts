@@ -3,7 +3,7 @@
 import { UploadFileType } from "@/types";
 import { createAdminClient } from "../appwrite";
 import {
-  constructDownloadUrl,
+  constructFileUrl,
   getFileTypeAndExtension,
   handleError,
   parseStringify,
@@ -33,7 +33,7 @@ export const uploadFile = async ({
 
     const fileDocument = {
       name: bucketFile.name,
-      url: constructDownloadUrl(bucketFile.$id),
+      url: constructFileUrl(bucketFile.$id),
       type,
       bucketFileId: bucketFile.$id,
       accountId,
