@@ -24,3 +24,10 @@ export type ActionType = {
   icon: string;
   value: string;
 };
+
+export type RenameFileType = {
+  fileId: string;
+  name: string;
+  extension: string;
+  path: string;
+};

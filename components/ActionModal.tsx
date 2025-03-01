@@ -13,6 +13,8 @@ import { ActionType } from "@/types";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Models } from "node-appwrite";
+import { renameFile } from "@/lib/actions/file.actions";
+import { usePathname } from "next/navigation";
 
 const ActionModal = ({
   action,
@@ -27,8 +29,25 @@ const ActionModal = ({
 }) => {
   if (!action) return null;
   const [fileName, setFileName] = useState<string>(file.name);
+  const [isLoading, setIsLoading] = useState(false);
+  const path = usePathname();
 
-  const handleAction = async () => {};
+  const handleAction = async () => {
+    setIsLoading(true);
+    const actions = {
+      rename: () =>
+        renameFile({
+          fileId: file.$id,
+          name: fileName,
+          extension: file.extension,
+          path,
+        }),
+      share: () => {},
+      delete: () => {},
+    };
+
+    const success = await actions[action.value as keyof typeof actions]()
+  };
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
