@@ -13,9 +13,11 @@ import { ActionType } from "@/types";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Models } from "node-appwrite";
-import { renameFile } from "@/lib/actions/file.actions";
+import { renameFile, shareFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
 import FileDetails from "./FileDetails";
+import ShareFile from "./ShareFile";
+import Image from "next/image";
 
 const ActionModal = ({
   action,
@@ -31,6 +33,9 @@ const ActionModal = ({
   if (!action) return null;
   const [fileName, setFileName] = useState<string>(file.name);
   const [isLoading, setIsLoading] = useState(false);
+  const [emails, setEmails] = useState<string[]>(file.users);
+  const [localEmails, setLocalEmails] = useState<string[]>([]);
+
   const path = usePathname();
 
   const handleAction = async () => {
@@ -43,11 +48,29 @@ const ActionModal = ({
           extension: file.extension,
           path,
         }),
-      share: () => {},
+      share: () => {
+        setEmails((prev) => [...prev, ...localEmails]); // Merge localEmails with existing ones
+        return shareFile({
+          fileId: file.$id,
+          emails: [...emails, ...localEmails], // Ensure latest state
+          path,
+        });
+      },
       delete: () => {},
     };
 
-    const success = await actions[action.value as keyof typeof actions]();
+    await actions[action.value as keyof typeof actions]();
+    setIsLoading(false);
+  };
+
+  const handleRemoveUser = async (email: string) => {
+    const updatedEmails = emails.filter((e) => e !== email);
+    const success = await shareFile({
+      fileId: file.$id,
+      emails: updatedEmails,
+      path,
+    });
+    if (success) setEmails(updatedEmails);
   };
 
   return (
@@ -68,13 +91,32 @@ const ActionModal = ({
               className="!mt-6"
             />
           )}
-          {action.value === "details" && <FileDetails file={file} onClose={onClose}/>}
+          {action.value === "details" && (
+            <FileDetails file={file} onClose={onClose} />
+          )}
+          {action.value === "share" && (
+            <ShareFile
+              file={file}
+              emails={emails}
+              onInputChange={setLocalEmails}
+              onRemove={handleRemoveUser}
+            />
+          )}
         </AlertDialogHeader>
         {["rename", "delete", "share"].includes(action.value) && (
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleAction}>
               {action.label}
+              {isLoading && (
+                <Image
+                  src="/assets/icons/loader.svg"
+                  alt="loader"
+                  width={24}
+                  height={24}
+                  className="animate-spin ml-2"
+                />
+              )}
             </AlertDialogAction>
           </AlertDialogFooter>
         )}

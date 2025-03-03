@@ -1,6 +1,6 @@
 "use server";
 
-import { RenameFileType, UploadFileType } from "@/types";
+import { RenameFileType, ShareFileType, UploadFileType } from "@/types";
 import { createAdminClient } from "../appwrite";
 import {
   constructFileUrl,
@@ -107,5 +107,21 @@ export const renameFile = async ({
     return parseStringify(renamedFile);
   } catch (error) {
     handleError(error, "Failed to rename file");
+  }
+};
+
+export const shareFile = async ({ fileId, emails, path }: ShareFileType) => {
+  const { databases } = await createAdminClient();
+  try {
+    const updatedFile = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.filesCollectionId,
+      fileId,
+      { users: emails }
+    );
+    revalidatePath(path);
+    return parseStringify(updatedFile);
+  } catch (error) {
+    handleError(error, "Failed to share");
   }
 };

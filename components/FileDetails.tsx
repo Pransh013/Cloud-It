@@ -1,6 +1,5 @@
 import { Models } from "node-appwrite";
-import Thumbnail from "./Thumbnail";
-import FormattedDateTime from "./FormattedDateTime";
+import { ImageThumbnail } from "./Thumbnail";
 import { convertFileSize, formatDateTime } from "@/lib/utils";
 import { X } from "lucide-react";
 
@@ -13,17 +12,7 @@ const DetailRow = ({ label, value }: { label: string; value: string }) => (
 const FileDetails = ({ file, onClose }: { file: Models.Document; onClose: () => void }) => {
   return (
     <div className="space-y-1">
-      <div className="file-details-thumbnail">
-        <Thumbnail
-          extension={file.extenstion}
-          type={file.type}
-          url={file.url}
-        />
-        <div>
-          <p className="font-medium line-clamp-1">{file.name}</p>
-          <FormattedDateTime date={file.$createdAt} className="caption" />
-        </div>
-      </div>
+      <ImageThumbnail file={ file} />
       <div className="px-3 py-2">
         <DetailRow label="Format:" value={file.extension} />
         <DetailRow label="Size:" value={convertFileSize(file.size)} />

@@ -1,3 +1,5 @@
+import { Models } from "node-appwrite";
+
 export type UserSignupType = {
   fullName: string;
   email: string;
@@ -5,8 +7,8 @@ export type UserSignupType = {
 
 export type UploadFileType = {
   file: File;
-  ownerId: string;
   accountId: string;
+  ownerId: string;
   path: string;
 };
 
@@ -30,4 +32,17 @@ export type RenameFileType = {
   name: string;
   extension: string;
   path: string;
+};
+
+export type ShareFileType = {
+  fileId: string;
+  emails: string[];
+  path: string;
+};
+
+export type ShareFileProps = {
+  file: Models.Document;
+  emails: string[];
+  onInputChange: React.Dispatch<React.SetStateAction<string[]>>;
+  onRemove: (email: string) => Promise<void>;
 };

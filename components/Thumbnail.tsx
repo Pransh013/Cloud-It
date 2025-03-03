@@ -1,8 +1,9 @@
 import { cn, getFileIcon } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
+import FormattedDateTime from "./FormattedDateTime";
+import { Models } from "node-appwrite";
 
-const Thumbnail = ({
+export const Thumbnail = ({
   url = "",
   type,
   extension,
@@ -14,11 +15,12 @@ const Thumbnail = ({
   extension: string;
   className?: string;
   imageClassName?: string;
-    }) => {
-    
+}) => {
   const isImage = type === "image" && extension !== "svg";
   return (
-    <figure className={cn("thumbnail border border-muted-foreground", className)}>
+    <figure
+      className={cn("thumbnail border border-muted-foreground", className)}
+    >
       <Image
         src={isImage ? url : getFileIcon(type, extension)}
         height={80}
@@ -34,4 +36,14 @@ const Thumbnail = ({
   );
 };
 
-export default Thumbnail;
+export const ImageThumbnail = ({ file }: { file: Models.Document }) => {
+  return (
+    <div className="file-details-thumbnail">
+      <Thumbnail extension={file.extenstion} type={file.type} url={file.url} />
+      <div>
+        <p className="font-medium line-clamp-1">{file.name}</p>
+        <FormattedDateTime date={file.$createdAt} className="caption" />
+      </div>
+    </div>
+  );
+};

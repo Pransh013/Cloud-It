@@ -15,12 +15,35 @@ import { EllipsisVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Models } from "node-appwrite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionModal from "./ActionModal";
+import { getCurrentUser } from "@/lib/actions/user.actions";
 
 const ActionsDropdown = ({ file }: { file: Models.Document }) => {
   const [action, setAction] = useState<ActionType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [availableActions, setAvailableActions] =
+    useState(actionsDropdownItems);
+
+  useEffect(() => {
+    const haveSharePermissions = async () => {
+      const currentUser = await getCurrentUser();
+      const isOwner = currentUser?.accountId === file.accountId;
+
+      setAvailableActions((actions) =>
+        actions.filter((action) => {
+          if (
+            action.value === "share" ||
+            action.value === "rename" ||
+            action.value === "delete"
+          )
+            return isOwner;
+          return true;
+        })
+      );
+    };
+    haveSharePermissions();
+  }, [file]);
 
   const handleActionClick = (item: ActionType) => {
     if (item.value === "download") return;
@@ -38,7 +61,7 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
             {file.name}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {actionsDropdownItems.map((item) => (
+          {availableActions.map((item) => (
             <DropdownMenuItem
               key={item.value}
               className="cursor-pointer"

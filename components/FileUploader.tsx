@@ -5,12 +5,12 @@ import { useDropzone } from "react-dropzone";
 import { Button } from "./ui/button";
 import { convertFileToUrl, getFileTypeAndExtension } from "@/lib/utils";
 import { Upload, X } from "lucide-react";
-import Thumbnail from "./Thumbnail";
 import ProgressBar from "./ProgressBar";
 import { MAX_FILE_SIZE } from "@/config";
 import { toast } from "sonner";
 import { uploadFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
+import { Thumbnail } from "./Thumbnail";
 
 const FileUploader = ({
   ownerId,

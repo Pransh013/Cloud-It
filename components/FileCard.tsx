@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Models } from "node-appwrite";
-import Thumbnail from "./Thumbnail";
 import { convertFileSize } from "@/lib/utils";
 import FormattedDateTime from "./FormattedDateTime";
 import ActionsDropdown from "./ActionsDropdown";
+import { Thumbnail } from "./Thumbnail";
 
 const FileCard = ({ file }: { file: Models.Document }) => {
   return (
     <Link
       href={file.url}
       target="_blank"
-      className="flex cursor-pointer flex-col w-72 gap-6 p-5 shadow-[0_4px_30px] shadow-muted-foreground/35 dark:shadow-muted-foreground/10 border-2 rounded-2xl hover:shadow-none transition-all"
+      className="flex cursor-pointer bg-muted flex-col w-72 gap-6 p-5 shadow-[0_4px_30px] shadow-muted-foreground/35 dark:shadow-muted-foreground/10 rounded-2xl hover:shadow-none transition-all"
     >
       <div className="flex justify-between">
         <Thumbnail
