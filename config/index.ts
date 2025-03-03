@@ -125,5 +125,5 @@ export const actionDescriptions: Record<string, string> = {
   share:
     "Sharing this file will grant others access based on the selected permissions. You can modify or revoke access at any time.",
   delete:
-    "This action cannot be undone. This will permanently delete the file and remove it from our servers.",
+    "Are you sure you want to delete this file? This action cannot be undone.",
 };

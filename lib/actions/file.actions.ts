@@ -1,6 +1,11 @@
 "use server";
 
-import { RenameFileType, ShareFileType, UploadFileType } from "@/types";
+import {
+  DeleteFileType,
+  RenameFileType,
+  ShareFileType,
+  UploadFileType,
+} from "@/types";
 import { createAdminClient } from "../appwrite";
 import {
   constructFileUrl,
@@ -121,6 +126,28 @@ export const shareFile = async ({ fileId, emails, path }: ShareFileType) => {
     );
     revalidatePath(path);
     return parseStringify(updatedFile);
+  } catch (error) {
+    handleError(error, "Failed to share");
+  }
+};
+
+export const deleteFile = async ({
+  fileId,
+  bucketFileId,
+  path,
+}: DeleteFileType) => {
+  const { databases, storage } = await createAdminClient();
+  try {
+    const deletedFile = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.filesCollectionId,
+      fileId
+    );
+
+    if (deletedFile)
+      await storage.deleteFile(appwriteConfig.bucketId, bucketFileId);
+    revalidatePath(path);
+    return parseStringify({ status: "success" });
   } catch (error) {
     handleError(error, "Failed to share");
   }

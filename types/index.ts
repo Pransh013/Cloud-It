@@ -40,6 +40,12 @@ export type ShareFileType = {
   path: string;
 };
 
+export type DeleteFileType = {
+  fileId: string;
+  bucketFileId: string;
+  path: string;
+};
+
 export type ShareFileProps = {
   file: Models.Document;
   emails: string[];

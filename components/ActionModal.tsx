@@ -13,7 +13,7 @@ import { ActionType } from "@/types";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Models } from "node-appwrite";
-import { renameFile, shareFile } from "@/lib/actions/file.actions";
+import { deleteFile, renameFile, shareFile } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
 import FileDetails from "./FileDetails";
 import ShareFile from "./ShareFile";
@@ -49,14 +49,19 @@ const ActionModal = ({
           path,
         }),
       share: () => {
-        setEmails((prev) => [...prev, ...localEmails]); // Merge localEmails with existing ones
+        setEmails((prev) => [...prev, ...localEmails]);
         return shareFile({
           fileId: file.$id,
-          emails: [...emails, ...localEmails], // Ensure latest state
+          emails: [...emails, ...localEmails],
           path,
         });
       },
-      delete: () => {},
+      delete: () =>
+        deleteFile({
+          fileId: file.$id,
+          bucketFileId: file.bucketFileId,
+          path,
+        }),
     };
 
     await actions[action.value as keyof typeof actions]();
@@ -77,7 +82,7 @@ const ActionModal = ({
     <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent className="flex flex-col gap-4 w-96">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-center">
+          <AlertDialogTitle className="text-center text-xl">
             {action.label}
           </AlertDialogTitle>
           <AlertDialogDescription className="text-center">
@@ -101,6 +106,10 @@ const ActionModal = ({
               onInputChange={setLocalEmails}
               onRemove={handleRemoveUser}
             />
+          )}
+
+          {action.value === "delete" && (
+            <p className="text-center text-sm">⚠️ Confirm File Deletion?</p>
           )}
         </AlertDialogHeader>
         {["rename", "delete", "share"].includes(action.value) && (
