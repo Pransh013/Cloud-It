@@ -14,28 +14,28 @@ const FileType = async ({searchParams, params }: SearchParamProps) => {
   const files = await getFiles({ types, searchText, sort });
 
   return (
-    <div className="w-full px-8 py-4">
-      <section>
+    <div className="w-full px-24 py-4">
+      <section className="">
         <h1 className="capitalize text-3xl font-bold">{type}</h1>
-        <div className="flex justify-between py-1">
+        <div className="flex justify-between py-2">
           <p>
             Total: <span>0MB</span>
           </p>
-          <div className="flex">
-            <p>Sort By:</p>
+          <div className="flex items-center gap-2">
+            <p className="flex-shrink-0">Sort By:</p>
             <SortFiles />
           </div>
         </div>
       </section>
 
       {files!.total > 0 ? (
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-4 justify-items-center px-14">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-4 justify-items-center">
           {files?.documents.map((file: Models.Document) => (
             <FileCard key={file.$id} file={file} />
           ))}
         </section>
       ) : (
-        <p>No files uploaded</p>
+        <p className="text-center text-3xl mt-4 ">No files uploaded</p>
       )}
     </div>
   );

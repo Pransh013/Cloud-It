@@ -127,3 +127,30 @@ export const actionDescriptions: Record<string, string> = {
   delete:
     "Are you sure you want to delete this file? This action cannot be undone.",
 };
+
+export const sortTypes = [
+  {
+    label: "Date created (newest)",
+    value: "$createdAt-desc",
+  },
+  {
+    label: "Date Created (oldest)",
+    value: "$createdAt-asc",
+  },
+  {
+    label: "Name (A-Z)",
+    value: "name-asc",
+  },
+  {
+    label: "Name (Z-A)",
+    value: "name-desc",
+  },
+  {
+    label: "Size (Highest)",
+    value: "size-desc",
+  },
+  {
+    label: "Size (Lowest)",
+    value: "size-asc",
+  },
+];
