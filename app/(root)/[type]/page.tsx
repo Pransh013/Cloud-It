@@ -1,12 +1,18 @@
 import FileCard from "@/components/FileCard";
 import SortFiles from "@/components/SortFiles";
 import { getFiles } from "@/lib/actions/file.actions";
+import { fileTypeParamsMap } from "@/lib/utils";
 import { SearchParamProps } from "@/types";
 import { Models } from "node-appwrite";
 
-const FileType = async ({ params }: SearchParamProps) => {
+const FileType = async ({searchParams, params }: SearchParamProps) => {
   const type = ((await params)?.type as string) || "";
-  const files = await getFiles();
+  const searchText = ((await searchParams)?.query as string) || ""
+  const sort = ((await searchParams)?.sort as string) || ""
+  
+  const types = fileTypeParamsMap[type];
+  const files = await getFiles({ types, searchText, sort });
+
   return (
     <div className="w-full px-8 py-4">
       <section>

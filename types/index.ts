@@ -52,3 +52,12 @@ export type ShareFileProps = {
   onInputChange: React.Dispatch<React.SetStateAction<string[]>>;
   onRemove: (email: string) => Promise<void>;
 };
+
+export type FileType = "document" | "image" | "video" | "audio" | "other";
+
+export type GetFilesType = {
+  types: FileType[];
+  searchText?: string;
+  sort?: string;
+  limit?: number;
+};

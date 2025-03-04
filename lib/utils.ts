@@ -4,6 +4,7 @@ import {
   imageExtensions,
   videoExtensions,
 } from "@/config";
+import { FileType } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -11,8 +12,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const parseStringify = <T>(value: T): T =>
-  JSON.parse(JSON.stringify(value));
+export const parseStringify = <T>(value: T): T => {
+  return JSON.parse(JSON.stringify(value));
+};
 
 export const handleError = (error: unknown, message: string) => {
   console.log(error, message);
@@ -145,4 +147,12 @@ export const formatDateTime = (isoString: string | null | undefined) => {
   const month = monthNames[date.getMonth()];
 
   return `${time}, ${day} ${month}`;
+};
+
+export const fileTypeParamsMap: Record<string, FileType[]> = {
+  documents: ["document"],
+  images: ["image"],
+  media: ["video", "audio"],
+  others: ["other"],
+  default: ["document"],
 };

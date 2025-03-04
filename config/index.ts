@@ -8,7 +8,7 @@ import {
   NotebookPen,
 } from "lucide-react";
 
-export const data = {
+export const sidebarData = {
   navMain: [
     {
       title: "Dashboard",
@@ -26,8 +26,8 @@ export const data = {
       icon: File,
     },
     {
-      title: "Videos",
-      url: "/videos",
+      title: "Media",
+      url: "/media",
       icon: Clapperboard,
     },
     {

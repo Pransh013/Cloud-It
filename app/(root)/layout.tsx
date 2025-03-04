@@ -26,7 +26,7 @@ export default async function HomeLayout({
 }) {
   const currentUser = await getCurrentUser();
   if (!currentUser) return redirect("/sign-in");
-  
+
   return (
     <SidebarProvider>
       <AppSidebar fullName={currentUser.fullName} email={currentUser.email} />
@@ -47,13 +47,13 @@ export default async function HomeLayout({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 w-1/3">
+            <SearchForm />
             <FileUploader
               ownerId={currentUser.$id}
               accountId={currentUser.accountId}
             />
             <ToggleTheme />
-            <SearchForm className="w-full sm:ml-auto sm:w-auto" />
           </div>
         </header>
         <div className="flex flex-1">{children}</div>

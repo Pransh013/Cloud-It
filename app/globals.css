@@ -411,10 +411,10 @@
     @apply body-2 shad-no-focus  placeholder:body-1 w-full border-none p-0 shadow-none placeholder:text-light-200 !important;
   }
   .search-result {
-    @apply absolute left-0 top-16 z-50 flex w-full flex-col gap-3 rounded-[20px] bg-white p-4 !important;
+    @apply absolute left-1/2 -translate-x-1/2 top-12 z-50 flex w-[110%] flex-col gap-3 rounded-lg bg-background p-2 border !important;
   }
   .empty-result {
-    @apply body-2 text-center text-light-100 !important;
+    @apply body-2 text-center p-2 !important;
   }
 
   /* Sidebar */

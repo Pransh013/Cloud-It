@@ -2,6 +2,8 @@
 
 import {
   DeleteFileType,
+  FileType,
+  GetFilesType,
   RenameFileType,
   ShareFileType,
   UploadFileType,
@@ -66,28 +68,46 @@ export const uploadFile = async ({
   }
 };
 
-const createQueries = (currentUser: Models.Document) => {
+const createQueries = (
+  currentUser: Models.Document,
+  extraQueries: string[]
+) => {
   const queries = [
     Query.or([
       Query.equal("owner", [currentUser.$id]),
       Query.contains("users", [currentUser.email]),
     ]),
+    ...extraQueries,
   ];
   return queries;
 };
 
-export const getFiles = async () => {
+export const getFiles = async ({
+  types = [],
+  searchText = "",
+  sort = "$createdAt-desc",
+  limit,
+}: GetFilesType) => {
   const { databases } = await createAdminClient();
   try {
     const currentUser = await getCurrentUser();
     if (!currentUser) throw new Error("User not found");
-    const queries = createQueries(currentUser);
+
+    const extraQueries: string[] = [];
+    if (types?.length > 0) extraQueries.push(Query.equal("type", types));
+    if (searchText) extraQueries.push(Query.contains("name", searchText));
+    if (limit) extraQueries.push(Query.limit(limit));
+    const [sortBy, orderBy] = sort.split("-");
+    extraQueries.push(
+      orderBy === "desc" ? Query.orderDesc(sortBy) : Query.orderAsc(sortBy)
+    );
+    const queries = createQueries(currentUser, extraQueries);
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.filesCollectionId,
       queries
     );
-    return parseStringify(files);
+  return parseStringify(files);
   } catch (error) {
     handleError(error, "Failed to get files");
   }
