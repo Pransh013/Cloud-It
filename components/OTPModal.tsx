@@ -20,6 +20,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { sendEmailOTP, verifySecret } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 
 const OTPModal = ({
   accountId,
@@ -69,14 +70,7 @@ const OTPModal = ({
           <AlertDialogTitle className="h2 text-center">
             Enter your OTP
           </AlertDialogTitle>
-          <Image
-            src="/assets/icons/close-dark.svg"
-            alt="close-button"
-            width={20}
-            height={20}
-            className="otp-close-button"
-            onClick={() => setIsOpen(false)}
-          />
+          <X onClick={() => setIsOpen(false)} className="cursor-pointer" />
           <AlertDialogDescription className="subtitle-2 text-center text-light-100">
             We've sent a code to{" "}
             <span className="pl-1 text-brand">{email}</span>

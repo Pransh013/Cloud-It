@@ -91,6 +91,8 @@ export const audioExtensions = ["mp3", "wav", "ogg", "flac"];
 
 export const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
+export const TOTAL_STORAGE = 2 * 1024 * 1024 * 1024;
+
 export const actionsDropdownItems = [
   {
     label: "Rename",

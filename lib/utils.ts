@@ -2,11 +2,13 @@ import {
   audioExtensions,
   documentExtensions,
   imageExtensions,
+  TOTAL_STORAGE,
   videoExtensions,
 } from "@/config";
 import { FileType } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { File, Images, Clapperboard, NotebookPen } from "lucide-react";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -155,4 +157,46 @@ export const fileTypeParamsMap: Record<string, FileType[]> = {
   media: ["video", "audio"],
   others: ["other"],
   default: ["document"],
+};
+
+export const getUsageSummary = (totalSpace: any) => {
+  return [
+    {
+      title: "Documents",
+      size: totalSpace.document.size,
+      latestDate: totalSpace.document.latestDate,
+      icon: File,
+      url: "/documents",
+    },
+    {
+      title: "Images",
+      size: totalSpace.image.size,
+      latestDate: totalSpace.image.latestDate,
+      icon: Images,
+      url: "/images",
+    },
+    {
+      title: "Media",
+      size: totalSpace.video.size + totalSpace.audio.size,
+      latestDate:
+        totalSpace.video.latestDate > totalSpace.audio.latestDate
+          ? totalSpace.video.latestDate
+          : totalSpace.audio.latestDate,
+      icon: Clapperboard,
+      url: "/media",
+    },
+    {
+      title: "Others",
+      size: totalSpace.other.size,
+      latestDate: totalSpace.other.latestDate,
+      icon: NotebookPen,
+      url: "/others",
+    },
+  ];
+};
+
+export const calculatePercentage = (sizeInBytes: number) => {
+  const totalSizeInBytes = TOTAL_STORAGE;
+  const percentage = (sizeInBytes / totalSizeInBytes) * 100;
+  return Number(percentage.toFixed(2));
 };
