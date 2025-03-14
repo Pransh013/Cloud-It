@@ -11,15 +11,21 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
             <CardContent className="grid p-0 md:grid-cols-2">
               {children}
               <div className="relative hidden bg-foreground md:flex flex-col items-center justify-center gap-6">
-                <Image
-                  src="/assets/icons/logo-full.svg"
-                  alt="logo"
-                  height={76}
-                  width={200}
-                />
-
+                <div className="flex items-center gap-4">
+                  <div className="flex aspect-square size-12 items-center justify-center rounded-lg">
+                    <Image
+                      src="/assets/icons/logo-brand.svg"
+                      alt="logo"
+                      height={50}
+                      width={50}
+                    />
+                  </div>
+                  <span className="text-3xl font-medium text-primary-foreground">Cloud It</span>
+                </div>
                 <div className="text-center space-y-2">
-                  <h1 className="text-3xl font-bold text-primary-foreground">Manage your files the best way</h1>
+                  <h1 className="text-3xl font-bold text-primary-foreground">
+                    Manage your files the best way
+                  </h1>
                   <p className="text-muted-foreground">
                     This is a place where you can store all your documents
                   </p>
@@ -29,7 +35,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           </Card>
           <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
             By clicking continue, you agree to our{" "}
-            <Link href="#">Terms of Service</Link> and <Link href="#">Privacy Policy</Link>.
+            <Link href="#">Terms of Service</Link> and{" "}
+            <Link href="#">Privacy Policy</Link>.
           </div>
         </div>
       </div>

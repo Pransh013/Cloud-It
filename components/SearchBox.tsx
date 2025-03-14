@@ -98,7 +98,7 @@ export function SearchForm() {
               </li>
             ))
           ) : (
-            <p className="empty-result">No files found</p>
+            <p className="text-center p-2">No files found</p>
           )}
         </ul>
       )}

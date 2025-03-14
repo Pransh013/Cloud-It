@@ -85,7 +85,7 @@ export default async function Dashboard() {
             ))}
           </ul>
         ) : (
-          <p className="body-1 mt-10 text-center">No files uploaded</p>
+          <p className="mt-10 text-center">No files uploaded</p>
         )}
       </section>
     </div>
