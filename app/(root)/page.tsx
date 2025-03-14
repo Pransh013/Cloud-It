@@ -14,7 +14,7 @@ export default async function Dashboard() {
     getTotalUsedSpace(),
   ]);
 
-  const usageSummary = getUsageSummary(totalSpace);
+  const usageSummary = getUsageSummary(totalSpace!);
   return (
     <div className="flex flex-col md:flex-row justify-between px-4 xl:px-36 py-6 w-full">
       <section>
@@ -85,9 +85,7 @@ export default async function Dashboard() {
             ))}
           </ul>
         ) : (
-          <p className="body-1 mt-10 text-center">
-            No files uploaded
-          </p>
+          <p className="body-1 mt-10 text-center">No files uploaded</p>
         )}
       </section>
     </div>

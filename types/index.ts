@@ -61,3 +61,18 @@ export type GetFilesType = {
   sort?: string;
   limit?: number;
 };
+
+export type SpaceCategory =  {
+  size: number;
+  latestDate: string; // Change to `Date` if necessary
+}
+
+export type UsageSummary = {
+  image: SpaceCategory;
+  document: SpaceCategory;
+  video: SpaceCategory;
+  audio: SpaceCategory;
+  other: SpaceCategory;
+  used: number;
+  all: number;
+}

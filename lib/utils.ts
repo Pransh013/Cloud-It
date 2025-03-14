@@ -5,7 +5,7 @@ import {
   TOTAL_STORAGE,
   videoExtensions,
 } from "@/config";
-import { FileType } from "@/types";
+import { FileType, UsageSummary } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { File, Images, Clapperboard, NotebookPen } from "lucide-react";
@@ -159,7 +159,7 @@ export const fileTypeParamsMap: Record<string, FileType[]> = {
   default: ["document"],
 };
 
-export const getUsageSummary = (totalSpace: any) => {
+export const getUsageSummary = (totalSpace: UsageSummary) => {
   return [
     {
       title: "Documents",
