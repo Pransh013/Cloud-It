@@ -62,9 +62,9 @@ const FileUploader = ({
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      <Button type="button" className="">
+      <Button type="button">
         <Upload />
-        <p>Upload</p>
+        <p className="hidden lg:block">Upload</p>
       </Button>
       {files.length > 0 && (
         <ul className="fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-2xl border p-5 border-neutral-300">

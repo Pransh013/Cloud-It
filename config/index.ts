@@ -156,3 +156,11 @@ export const sortTypes = [
     value: "size-asc",
   },
 ];
+
+export const breadcrumbMap: Record<string, string> = {
+  "/": "Dashboard",
+  "/images": "Images",
+  "/media": "Media",
+  "/documents": "Documents",
+  "/others": "Others",
+};

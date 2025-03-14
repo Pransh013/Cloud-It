@@ -13,6 +13,7 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
+  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import Image from "next/image";
@@ -65,57 +66,63 @@ const OTPModal = ({
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent className="shad-alert-dialog">
-        <AlertDialogHeader className="relative flex justify-center">
-          <AlertDialogTitle className="h2 text-center">
+      <AlertDialogContent className="outline-none flex flex-col items-center gap-6">
+        <AlertDialogHeader className="flex justify-center items-center">
+          <AlertDialogTitle className="text-2xl font-semibold text-center">
             Enter your OTP
           </AlertDialogTitle>
-          <X onClick={() => setIsOpen(false)} className="cursor-pointer" />
-          <AlertDialogDescription className="subtitle-2 text-center text-light-100">
+          <X
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer absolute right-3 top-1"
+          />
+          <AlertDialogDescription className="text-center text-muted-foreground">
             We've sent a code to{" "}
-            <span className="pl-1 text-brand">{email}</span>
+            <span className="pl-1 text-foreground font-medium">{email}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <InputOTP maxLength={6} value={password} onChange={setPassword}>
-          <InputOTPGroup className="shad-otp">
-            <InputOTPSlot index={0} className="shad-otp-slot" />
-            <InputOTPSlot index={1} className="shad-otp-slot" />
-            <InputOTPSlot index={2} className="shad-otp-slot" />
-            <InputOTPSlot index={3} className="shad-otp-slot" />
-            <InputOTPSlot index={4} className="shad-otp-slot" />
-            <InputOTPSlot index={5} className="shad-otp-slot" />
+          <InputOTPGroup>
+            <InputOTPSlot index={0} autoFocus />
+            <InputOTPSlot index={1} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
           </InputOTPGroup>
         </InputOTP>
-
-        <AlertDialogFooter>
-          <div className="flex w-full gap-4 flex-col">
-            <AlertDialogAction
+        <AlertDialogFooter className="w-full gap-2 flex !flex-col items-center">
+          <AlertDialogAction
+            type="button"
+            onClick={handleSubmit}
+            className="px-14 h-10"
+          >
+            Submit
+            {isLoading && (
+              <Image
+                src="/assets/icons/loader.svg"
+                alt="loader"
+                width={24}
+                height={24}
+                className="animate-spin ml-2"
+              />
+            )}
+          </AlertDialogAction>
+          <div className="text-muted-foreground text-sm text-center">
+            Didn't get a code?
+            <Button
+              onClick={handleResendOTP}
               type="button"
-              onClick={handleSubmit}
-              className="shad-submit-btn h-12"
+              variant="link"
+              className="pl-1.5 text-foreground underline"
             >
-              Submit
-              {isLoading && (
-                <Image
-                  src="/assets/icons/loader.svg"
-                  alt="loader"
-                  width={24}
-                  height={24}
-                  className="animate-spin ml-2"
-                />
-              )}
-            </AlertDialogAction>
-            <div className="subtitle-2 mt-2 text-light-100 text-center">
-              Didn't get a code?
-              <Button
-                onClick={handleResendOTP}
-                type="button"
-                variant="link"
-                className="pl-1.5 text-brand"
-              >
-                Click to resend
-              </Button>
-            </div>
+              Click to resend
+            </Button>
           </div>
         </AlertDialogFooter>
       </AlertDialogContent>

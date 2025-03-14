@@ -20,7 +20,7 @@ export const Thumbnail = ({
   return (
     <figure
       className={cn(
-        "flex-center size-[50px] min-w-[50px] overflow-hidden rounded-full  ",
+        "flex-center size-[50px] min-w-[50px] overflow-hidden rounded-full",
         className
       )}
     >
@@ -32,7 +32,7 @@ export const Thumbnail = ({
         className={cn(
           "size-10 object-contain",
           imageClassName,
-          isImage && "size-full object-cover object-center"
+          isImage && "size-full !object-cover object-center"
         )}
       />
     </figure>

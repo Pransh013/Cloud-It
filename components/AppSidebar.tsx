@@ -29,18 +29,16 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
+              <Link href="/" className="flex gap-4">
+                <div className="flex aspect-square size-12 items-center justify-center rounded-lg">
                   <Image
                     src="/assets/icons/logo-brand.svg"
                     alt="logo"
-                    height={40}
-                    width={40}
+                    height={50}
+                    width={50}
                   />
                 </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Cloud It</span>
-                </div>
+                <span className="text-2xl font-medium">Cloud It</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

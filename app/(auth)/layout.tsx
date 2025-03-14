@@ -1,43 +1,38 @@
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen">
-      <section className="bg-brand p-10 hidden w-1/2 items-center justify-center lg:flex xl:w-2/5">
-        <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
-          <Image
-            src="/assets/icons/logo-full.svg"
-            alt="logo"
-            height={82}
-            width={224}
-          />
-          <div className="space-y-5 text-white">
-            <h1 className="h1">Manage your files the best way</h1>
-            <p className="body-1">
-              This is a place where you can store all your documents
-            </p>
+    <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        <div className="flex flex-col gap-6">
+          <Card className="overflow-hidden">
+            <CardContent className="grid p-0 md:grid-cols-2">
+              {children}
+              <div className="relative hidden bg-foreground md:flex flex-col items-center justify-center gap-6">
+                <Image
+                  src="/assets/icons/logo-full.svg"
+                  alt="logo"
+                  height={76}
+                  width={200}
+                />
+
+                <div className="text-center space-y-2">
+                  <h1 className="text-3xl font-bold text-primary-foreground">Manage your files the best way</h1>
+                  <p className="text-muted-foreground">
+                    This is a place where you can store all your documents
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            By clicking continue, you agree to our{" "}
+            <Link href="#">Terms of Service</Link> and <Link href="#">Privacy Policy</Link>.
           </div>
-          <Image
-            src="/assets/images/files.png"
-            height={332}
-            width={332}
-            alt="Files"
-            className="transition-all hover:scale-105 hover:rotate-2"
-          />
         </div>
-      </section>
-      <section className="flex flex-col flex-1 items-center p-4 py-10 bg-white lg:justify-center lg:p-10 lg:py-0">
-        <div className="mb-16 lg:hidden">
-          <Image
-            src="/assets/icons/logo-full-brand.svg"
-            alt="logo"
-            width={224}
-            height={82}
-            className="h-auto w-[200px] lg:w-[250px]"
-          />
-        </div>
-        {children}
-      </section>
+      </div>
     </div>
   );
 };

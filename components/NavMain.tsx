@@ -27,7 +27,7 @@ export function NavMain({
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
-      <SidebarMenu className="bg-red-200 gap-3">
+      <SidebarMenu className="gap-3">
         {items.map((item) => (
           <Collapsible key={item.title} asChild>
             <SidebarMenuItem>

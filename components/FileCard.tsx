@@ -12,27 +12,25 @@ const FileCard = ({ file }: { file: Models.Document }) => {
       target="_blank"
       className="flex cursor-pointer bg-muted flex-col w-72 gap-6 p-5 shadow-[0_4px_30px] shadow-muted-foreground/35 dark:shadow-muted-foreground/10 rounded-2xl hover:shadow-none transition-all"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <Thumbnail
           extension={file.extension}
           type={file.type}
           url={file.url}
-          className="!size-20"
-          imageClassName="!size-11"
+          className="!size-16"
         />
 
-        <div className="flex flex-col justify-between items-end">
+        <div className="flex flex-col justify-between gap-6 items-end">
           <ActionsDropdown file={file} />
-          <p className="">{convertFileSize(file.size)}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {convertFileSize(file.size)}
+          </p>
         </div>
       </div>
-      <div className="file-card-details">
-        <p className="subtitle-2 line-clamp-1">{file.name}</p>
-        <FormattedDateTime
-          date={file.$createdAt}
-          className="body-2 text-light-100"
-        />
-        <p className="caption line-clamp-1 text-light-200">
+      <div className="space-y-2">
+        <p className="line-clamp-1 font-medium">{file.name}</p>
+        <FormattedDateTime date={file.$createdAt} className="text-sm" />
+        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
           By: {file.owner.fullName}
         </p>
       </div>
