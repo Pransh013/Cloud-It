@@ -30,15 +30,15 @@ const ActionModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  if (!action) return null;
   const [fileName, setFileName] = useState<string>(file.name);
   const [isLoading, setIsLoading] = useState(false);
   const [emails, setEmails] = useState<string[]>(file.users);
   const [localEmails, setLocalEmails] = useState<string[]>([]);
-
+  
   const path = usePathname();
-
+  
   const handleAction = async () => {
+    if (!action) return;
     setIsLoading(true);
     const actions = {
       rename: () =>
@@ -77,7 +77,7 @@ const ActionModal = ({
     });
     if (success) setEmails(updatedEmails);
   };
-
+  if (!action) return null;
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent className="flex flex-col gap-4 w-96">

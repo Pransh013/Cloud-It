@@ -64,7 +64,7 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
             })
           : await signInUser({ email: values.email });
       setAccountId(user!.accountId);
-    } catch (error) {
+    } catch {
       setErrorMessage("Failed to create account. Please try again.");
     } finally {
       setIsLoading(false);
@@ -137,7 +137,9 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
                 />
               )}
             </Button>
-            {errorMessage && <p className="text-red-600 text-center">*{errorMessage}</p>}
+            {errorMessage && (
+              <p className="text-red-600 text-center">*{errorMessage}</p>
+            )}
             <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border"></div>
             <div className="text-center text-sm font-medium">
               {type === "sign-in"

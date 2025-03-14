@@ -76,7 +76,7 @@ const OTPModal = ({
             className="cursor-pointer absolute right-3 top-1"
           />
           <AlertDialogDescription className="text-center text-muted-foreground">
-            We've sent a code to{" "}
+            We&apos;ve sent a code to{" "}
             <span className="pl-1 text-foreground font-medium">{email}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -114,7 +114,7 @@ const OTPModal = ({
             )}
           </AlertDialogAction>
           <div className="text-muted-foreground text-sm text-center">
-            Didn't get a code?
+            Didn&apos;t get a code?
             <Button
               onClick={handleResendOTP}
               type="button"
