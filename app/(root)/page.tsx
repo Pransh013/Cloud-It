@@ -50,12 +50,12 @@ export default async function Dashboard() {
         </ul>
       </section>
 
-      <section className=" rounded-lg border space-y-5 py-5 px-4 h-fit ">
+      <section className="rounded-lg border space-y-5 py-5 px-4 h-fit ">
         <h2 className="text-center text-3xl font-semibold">
           Recent uploaded files
         </h2>
         {files!.documents.length > 0 ? (
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 py-1 max-h-[500px] remove-scrollbar overflow-y-scroll">
             {files?.documents.map((file) => (
               <Link
                 href={file.url}

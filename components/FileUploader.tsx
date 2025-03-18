@@ -67,7 +67,7 @@ const FileUploader = ({
         <p className="hidden lg:block">Upload</p>
       </Button>
       {files.length > 0 && (
-        <ul className="fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-2xl border p-5 border-neutral-300">
+        <ul className="fixed bottom-10 bg-background right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-2xl border p-5 border-neutral-300">
           <h4 className="text-lg">Uploading</h4>
           {files.map((file, idx) => {
             const { extension, type } = getFileTypeAndExtension(file.name);
